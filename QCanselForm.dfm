@@ -1,0 +1,93 @@
+object frm_QCansel: Tfrm_QCansel
+  Left = 478
+  Top = 350
+  Width = 471
+  Height = 125
+  BorderIcons = []
+  Caption = 'frm_QCansel'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label_: TLabel
+    Left = 0
+    Top = 25
+    Width = 455
+    Height = 16
+    Align = alTop
+    Alignment = taCenter
+    Caption = #1047#1072#1082#1088#1099#1090#1100' '#1086#1090#1082#1072#1079#1086#1084'?'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Layout = tlCenter
+  end
+  object BitBtn1: TBitBtn
+    Left = 216
+    Top = 56
+    Width = 112
+    Height = 25
+    Cancel = True
+    Caption = '&'#1053#1077#1090
+    Default = True
+    ModalResult = 7
+    TabOrder = 0
+    Glyph.Data = {
+      DE010000424DDE01000000000000760000002800000024000000120000000100
+      0400000000006801000000000000000000001000000000000000000000000000
+      80000080000000808000800000008000800080800000C0C0C000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+      3333333333333FFFFF333333000033333388888833333333333F888888FFF333
+      000033338811111188333333338833FFF388FF33000033381119999111833333
+      38F338888F338FF30000339119933331111833338F388333383338F300003391
+      13333381111833338F8F3333833F38F3000039118333381119118338F38F3338
+      33F8F38F000039183333811193918338F8F333833F838F8F0000391833381119
+      33918338F8F33833F8338F8F000039183381119333918338F8F3833F83338F8F
+      000039183811193333918338F8F833F83333838F000039118111933339118338
+      F3833F83333833830000339111193333391833338F33F8333FF838F300003391
+      11833338111833338F338FFFF883F83300003339111888811183333338FF3888
+      83FF83330000333399111111993333333388FFFFFF8833330000333333999999
+      3333333333338888883333330000333333333333333333333333333333333333
+      0000}
+    NumGlyphs = 2
+  end
+  object BitBtn2: TBitBtn
+    Left = 336
+    Top = 56
+    Width = 112
+    Height = 25
+    Caption = #1044#1072
+    TabOrder = 1
+    Kind = bkYes
+  end
+  object BitBtn3: TBitBtn
+    Left = 16
+    Top = 56
+    Width = 161
+    Height = 25
+    Caption = #1054#1090#1084#1077#1085#1080#1090#1100' '#1079#1072#1082#1088#1099#1090#1080#1077
+    TabOrder = 2
+    Kind = bkCancel
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 455
+    Height = 25
+    Align = alTop
+    BevelOuter = bvNone
+    Ctl3D = False
+    ParentCtl3D = False
+    TabOrder = 3
+  end
+end
