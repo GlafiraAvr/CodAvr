@@ -513,7 +513,7 @@ nabout:=16;
     F_ResFrm.phone:=F_DM.Result1562.FieldByName('phone').AsString;
     F_ResFrm.porch:=F_DM.Result1562.FieldByName('Podesd').AsString;
     F_ResFrm.floor:=F_DM.Result1562.FieldByName('NumberFloor').AsString;
-    F_ResFrm._about:=F_DM.Result1562.FieldByName('About').AsString;
+    F_ResFrm._about:=ReplaceChar(F_DM.Result1562.FieldByName('About').AsString,'''','"');
     F_ResFrm._from:=F_DM.Result1562.FieldByName('opened').AsString;
 
     F_ResFrm._avar:=F_DM.Result1562.FieldByName('Avar').AsString;

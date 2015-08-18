@@ -23,11 +23,13 @@ type
     IBQNewHost: TIBQuery;
     ADOConn_1562: TADOConnection;
     ADOQ_ost1562: TADOQuery;
+    dset_time: TIBDataSet;
     procedure DataModuleDestroy(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure IBDatabaseBeforeDisconnect(Sender: TObject);
   private
     List_dsets:TLISt;
+    function getServerTime():TDateTime;
   public
     function Connect(const UserName: string; const Password: string): boolean;
     function ConnectVDS(const UserName: string; const Password: string): boolean;
@@ -633,6 +635,13 @@ begin
    Sleep(1000);
  end;
 
+end;
+
+function TDM_Main.getServerTime: TDateTime;
+begin
+if not dset_time.Active then
+ dset_time.Open;
+ result:=dset_time.fieldbyname('current_time').AsDateTime;
 end;
 
 end.

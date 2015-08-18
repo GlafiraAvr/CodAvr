@@ -1,6 +1,6 @@
 inherited dm_ReportAll1: Tdm_ReportAll1
-  Left = 504
-  Top = 318
+  Left = 558
+  Top = 610
   Width = 393
   inherited frReport: TfrReport
     Dataset = frDBDataSet1

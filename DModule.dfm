@@ -6,6 +6,7 @@ object DM_Main: TDM_Main
   Height = 524
   Width = 482
   object IBDatabase: TIBDatabase
+    Connected = True
     DatabaseName = 'E:\bases\avr_13.07.2015\AVR_KH_NEW.GDB'
     Params.Strings = (
       'user_name=avr_ib'
@@ -182,5 +183,15 @@ object DM_Main: TDM_Main
     Parameters = <>
     Left = 32
     Top = 384
+  end
+  object dset_time: TIBDataSet
+    Database = IBDatabase
+    Transaction = Tr_RCommited
+    SelectSQL.Strings = (
+      
+        'select current_time,current_date,current_timestamp from servantt' +
+        'able')
+    Left = 152
+    Top = 392
   end
 end

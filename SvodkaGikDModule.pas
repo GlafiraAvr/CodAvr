@@ -1809,7 +1809,7 @@ end;
 function Tdm_SvodkaGik.SaveToBase:boolean;
 const SQL ='insert into SVODKAGIK_SAVE'+
                            ' (DATEFORM, FIELNAME, SAVE_VALUE) values'+
-                           ' (''%s '',''%s'',%d )';
+                           ' (current_timestamp,''%s'',%d )';
 var sdt:string;
 
 begin
@@ -1818,51 +1818,51 @@ begin
   if  not isLoad() then begin
  with F_DataForStDisp do
   begin
-    MyExecIBSQL(IBSQL,Format(SQL,[sdt,'VodoSetiVsego',VodoSetiVsego]));
-    MyExecIBSQL(IBSQL,Format(SQL,[sdt,'VvodyVsego',VvodyVsego]));
-    MyExecIBSQL(IBSQL,Format(SQL,[sdt,'KolodtsyVsego',KolodtsyVsego]));
-    MyExecIBSQL(IBSQL,Format(SQL,[sdt,'KolonkiVsego',KolonkiVsego]));
-    MyExecIBSQL(IBSQL,Format(SQL,[sdt,'LukovVsego',LukovVsego]));
-    MyExecIBSQL(IBSQL,Format(SQL,[sdt,'LikvidNaVodoSetyax',LikvidNaVodoSetyax]));
-    MyExecIBSQL(IBSQL,Format(SQL,[sdt,'LikvidNaVvodax',LikvidNaVvodax]));
-    MyExecIBSQL(IBSQL,Format(SQL,[sdt,'UstanLukov',UstanLukov]));
-    MyExecIBSQL(IBSQL,Format(SQL,[sdt,'PostupNaVodoSetyax',PostupNaVodoSetyax]));
-    MyExecIBSQL(IBSQL,Format(SQL,[sdt,'PostupNaVvodax',PostupNaVvodax]));
+    MyExecIBSQL(IBSQL,Format(SQL,['VodoSetiVsego',VodoSetiVsego]));
+    MyExecIBSQL(IBSQL,Format(SQL,['VvodyVsego',VvodyVsego]));
+    MyExecIBSQL(IBSQL,Format(SQL,['KolodtsyVsego',KolodtsyVsego]));
+    MyExecIBSQL(IBSQL,Format(SQL,['KolonkiVsego',KolonkiVsego]));
+    MyExecIBSQL(IBSQL,Format(SQL,['LukovVsego',LukovVsego]));
+    MyExecIBSQL(IBSQL,Format(SQL,['LikvidNaVodoSetyax',LikvidNaVodoSetyax]));
+    MyExecIBSQL(IBSQL,Format(SQL,['LikvidNaVvodax',LikvidNaVvodax]));
+    MyExecIBSQL(IBSQL,Format(SQL,['UstanLukov',UstanLukov]));
+    MyExecIBSQL(IBSQL,Format(SQL,['PostupNaVodoSetyax',PostupNaVodoSetyax]));
+    MyExecIBSQL(IBSQL,Format(SQL,['PostupNaVvodax',PostupNaVvodax]));
 
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'TechejIzZemli',TechejIzZemli]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'TecheyIzKolodtsev',TecheyIzKolodtsev]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'NeispravnyxKolonok',NeispravnyxKolonok]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'UstanovlenoLukov',UstanovlenoLukov]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'Likvidirovano',Likvidirovano]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'IzNihZasypano',IzNihZasypano]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'Postupilo',Postupilo]));
+     MyExecIBSQL(IBSQL,Format(SQL,['TechejIzZemli',TechejIzZemli]));
+     MyExecIBSQL(IBSQL,Format(SQL,['TecheyIzKolodtsev',TecheyIzKolodtsev]));
+     MyExecIBSQL(IBSQL,Format(SQL,['NeispravnyxKolonok',NeispravnyxKolonok]));
+     MyExecIBSQL(IBSQL,Format(SQL,['UstanovlenoLukov',UstanovlenoLukov]));
+     MyExecIBSQL(IBSQL,Format(SQL,['Likvidirovano',Likvidirovano]));
+     MyExecIBSQL(IBSQL,Format(SQL,['IzNihZasypano',IzNihZasypano]));
+     MyExecIBSQL(IBSQL,Format(SQL,['Postupilo',Postupilo]));
 
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'NeZasypanoPoGorodu_Vsego',NeZasypanoPoGorodu_Vsego]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'NeZasypanoPoGorodu_Dzerzh',NeZasypanoPoGorodu_Dzerzh]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'NeZasypanoPoGorodu_Komintern',   NeZasypanoPoGorodu_Komintern]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'NeZasypanoPoGorodu_Ordzhon',NeZasypanoPoGorodu_Ordzhon]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'NeZasypanoPoGorodu_Kiev', NeZasypanoPoGorodu_Kiev]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'NeZasypanoPoGorodu_Moskov',NeZasypanoPoGorodu_Moskov]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'NeZasypanoPoGorodu_Frunz',NeZasypanoPoGorodu_Frunz]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'NeZasypanoPoGorodu_Lenin',NeZasypanoPoGorodu_Lenin]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'NeZasypanoPoGorodu_Oktjabr', NeZasypanoPoGorodu_Oktjabr]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'NeZasypanoPoGorodu_Chervon', NeZasypanoPoGorodu_Chervon]));
+     MyExecIBSQL(IBSQL,Format(SQL,['NeZasypanoPoGorodu_Vsego',NeZasypanoPoGorodu_Vsego]));
+     MyExecIBSQL(IBSQL,Format(SQL,['NeZasypanoPoGorodu_Dzerzh',NeZasypanoPoGorodu_Dzerzh]));
+     MyExecIBSQL(IBSQL,Format(SQL,['NeZasypanoPoGorodu_Komintern',   NeZasypanoPoGorodu_Komintern]));
+     MyExecIBSQL(IBSQL,Format(SQL,['NeZasypanoPoGorodu_Ordzhon',NeZasypanoPoGorodu_Ordzhon]));
+     MyExecIBSQL(IBSQL,Format(SQL,['NeZasypanoPoGorodu_Kiev', NeZasypanoPoGorodu_Kiev]));
+     MyExecIBSQL(IBSQL,Format(SQL,['NeZasypanoPoGorodu_Moskov',NeZasypanoPoGorodu_Moskov]));
+     MyExecIBSQL(IBSQL,Format(SQL,['NeZasypanoPoGorodu_Frunz',NeZasypanoPoGorodu_Frunz]));
+     MyExecIBSQL(IBSQL,Format(SQL,['NeZasypanoPoGorodu_Lenin',NeZasypanoPoGorodu_Lenin]));
+     MyExecIBSQL(IBSQL,Format(SQL,['NeZasypanoPoGorodu_Oktjabr', NeZasypanoPoGorodu_Oktjabr]));
+     MyExecIBSQL(IBSQL,Format(SQL,['NeZasypanoPoGorodu_Chervon', NeZasypanoPoGorodu_Chervon]));
 
 
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'UstanovlenoGidrantov', UstanovlenoGidrantov]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'CountGet062', CountGet062]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'CountClose062', CountClose062]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'CountLeft062', CountLeft062]));
+     MyExecIBSQL(IBSQL,Format(SQL,['UstanovlenoGidrantov', UstanovlenoGidrantov]));
+     MyExecIBSQL(IBSQL,Format(SQL,['CountGet062', CountGet062]));
+     MyExecIBSQL(IBSQL,Format(SQL,['CountClose062', CountClose062]));
+     MyExecIBSQL(IBSQL,Format(SQL,['CountLeft062', CountLeft062]));
 
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'kanal_vsego',kanal_vsego]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'PodtopTepSetei',PodtopTepSetei]));
-     MyExecIBSQL(IBSQL,Format(SQL,[sdt,'NetLukov',NetLukov]));
+     MyExecIBSQL(IBSQL,Format(SQL,['kanal_vsego',kanal_vsego]));
+     MyExecIBSQL(IBSQL,Format(SQL,['PodtopTepSetei',PodtopTepSetei]));
+     MyExecIBSQL(IBSQL,Format(SQL,['NetLukov',NetLukov]));
 
 
  end;
-   MyExecIBSQL(IBSQL,Format(SQL,[sdt,'OrderComingCount', OrderComingCount]));
-   MyExecIBSQL(IBSQL,Format(SQL,[sdt,'ClosedOrderCount', ClosedOrderCount]));
-   MyExecIBSQL(IBSQL,Format(SQL,[sdt,F_IPList.Text, -1]));
+   MyExecIBSQL(IBSQL,Format(SQL,['OrderComingCount', OrderComingCount]));
+   MyExecIBSQL(IBSQL,Format(SQL,['ClosedOrderCount', ClosedOrderCount]));
+   MyExecIBSQL(IBSQL,Format(SQL,[F_IPList.Text, -1]));
   end
   else  Result:=false;
 end;
