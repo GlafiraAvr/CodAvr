@@ -1,9 +1,9 @@
 inherited frm_Order: Tfrm_Order
-  Left = 475
-  Top = 285
+  Left = 340
+  Top = 230
   BorderStyle = bsDialog
   Caption = #1044#1072#1085#1085#1099#1077' '#1085#1072#1088#1103#1076#1072
-  ClientHeight = 468
+  ClientHeight = 551
   ClientWidth = 612
   DockSite = True
   DragKind = dkDock
@@ -72,7 +72,7 @@ inherited frm_Order: Tfrm_Order
   end
   object btn_NewOrder: TBitBtn
     Left = 350
-    Top = 400
+    Top = 488
     Width = 108
     Height = 25
     Caption = #1053#1086#1074#1099#1081' '#1085#1072#1088#1103#1076
@@ -102,7 +102,7 @@ inherited frm_Order: Tfrm_Order
   end
   object btn_SaveOrderData: TBitBtn
     Left = 145
-    Top = 400
+    Top = 488
     Width = 96
     Height = 25
     Caption = #1047#1072#1087#1080#1089#1072#1090#1100
@@ -132,7 +132,7 @@ inherited frm_Order: Tfrm_Order
   end
   object btn_CloseOrder: TBitBtn
     Left = 3
-    Top = 400
+    Top = 488
     Width = 142
     Height = 25
     Caption = #1047#1072#1082#1088#1099#1090#1100' '#1085#1072#1088#1103#1076
@@ -161,8 +161,8 @@ inherited frm_Order: Tfrm_Order
     NumGlyphs = 2
   end
   object GroupBox2: TGroupBox
-    Left = -2
-    Top = 224
+    Left = 6
+    Top = 272
     Width = 611
     Height = 57
     TabOrder = 1
@@ -327,8 +327,8 @@ inherited frm_Order: Tfrm_Order
     end
   end
   object gb_Bottom: TGroupBox
-    Left = 0
-    Top = 280
+    Left = 8
+    Top = 336
     Width = 609
     Height = 119
     Font.Charset = DEFAULT_CHARSET
@@ -646,7 +646,7 @@ inherited frm_Order: Tfrm_Order
   end
   object btn_Exit: TBitBtn
     Left = 535
-    Top = 400
+    Top = 488
     Width = 72
     Height = 25
     Caption = #1042#1099#1093#1086#1076
@@ -681,7 +681,7 @@ inherited frm_Order: Tfrm_Order
     Left = 0
     Top = -7
     Width = 609
-    Height = 224
+    Height = 272
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
@@ -931,10 +931,10 @@ inherited frm_Order: Tfrm_Order
       Tag = 11111
       Left = 19
       Top = 196
-      Width = 70
+      Width = 118
       Height = 21
       Decimal = 4
-      MaxValue = 9999.000000000000000000
+      MaxValue = 99999.000000000000000000
       ValueType = vtFloat
       TabOrder = 12
       OnChange = TopCtrlChange
@@ -1301,9 +1301,9 @@ inherited frm_Order: Tfrm_Order
       OnKeyDown = FormKeyDown
     end
     object pnl_LeakCalc: TPanel
-      Left = 88
+      Left = 144
       Top = 192
-      Width = 409
+      Width = 377
       Height = 26
       TabOrder = 13
       object Label1: TLabel
@@ -1393,10 +1393,81 @@ inherited frm_Order: Tfrm_Order
         OnKeyDown = FormKeyDown
       end
     end
+    object pnl_leak2: TPanel
+      Tag = 244
+      Left = 8
+      Top = 224
+      Width = 593
+      Height = 41
+      TabOrder = 14
+      object Label17: TLabel
+        Left = 11
+        Top = 8
+        Width = 56
+        Height = 26
+        Caption = #1064#1080#1088#1080#1085#1072' '#1083#1086#1090#1082#1072' ('#1084')'
+        WordWrap = True
+      end
+      object Label19: TLabel
+        Left = 192
+        Top = 8
+        Width = 94
+        Height = 26
+        Caption = #1042#1099#1089#1086#1090#1072' '#1087#1086#1090#1086#1082#1072' '#1074#1086#1076#1099' ('#1084')'
+        WordWrap = True
+      end
+      object Label22: TLabel
+        Left = 400
+        Top = 8
+        Width = 61
+        Height = 26
+        Caption = #1057#1082#1086#1088#1086#1089#1090#1100' ('#1084'/'#1089#1077#1082')'
+        WordWrap = True
+      end
+      object spewidthLot: TRxSpinEdit
+        Tag = 244
+        Left = 72
+        Top = 8
+        Width = 105
+        Height = 21
+        ValueType = vtFloat
+        TabOrder = 0
+        OnChange = TopCtrlChange
+        OnEnter = EntryEnter
+        OnExit = EntryExit
+        OnKeyDown = FormKeyDown
+      end
+      object speheightThread: TRxSpinEdit
+        Tag = 244
+        Left = 288
+        Top = 8
+        Width = 105
+        Height = 21
+        ValueType = vtFloat
+        TabOrder = 1
+        OnChange = TopCtrlChange
+        OnEnter = EntryEnter
+        OnExit = EntryExit
+        OnKeyDown = FormKeyDown
+      end
+      object speSpeedQ: TRxSpinEdit
+        Tag = 244
+        Left = 472
+        Top = 8
+        Width = 105
+        Height = 21
+        ValueType = vtFloat
+        TabOrder = 2
+        OnChange = TopCtrlChange
+        OnEnter = EntryEnter
+        OnExit = EntryExit
+        OnKeyDown = FormKeyDown
+      end
+    end
   end
   object btn_Excavations: TButton
-    Left = 422
-    Top = 342
+    Left = 430
+    Top = 398
     Width = 69
     Height = 19
     Caption = #1056#1072#1089#1082#1086#1087#1082#1080
@@ -1412,7 +1483,7 @@ inherited frm_Order: Tfrm_Order
   end
   object sb_ProcessStaus: TStatusBar
     Left = 0
-    Top = 444
+    Top = 527
     Width = 612
     Height = 24
     Font.Charset = DEFAULT_CHARSET
@@ -1426,7 +1497,7 @@ inherited frm_Order: Tfrm_Order
   end
   object btn_RestoreOpenState: TBitBtn
     Left = 287
-    Top = 400
+    Top = 488
     Width = 62
     Height = 25
     Caption = #1042#1086#1079#1074#1088#1072#1090
@@ -1441,7 +1512,7 @@ inherited frm_Order: Tfrm_Order
   end
   object btn_Print: TBitBtn
     Left = 467
-    Top = 400
+    Top = 488
     Width = 75
     Height = 25
     Caption = #1055#1077#1095#1072#1090#1100
@@ -1527,7 +1598,7 @@ inherited frm_Order: Tfrm_Order
   end
   object pnl_AomInfo: TPanel
     Left = 386
-    Top = 448
+    Top = 531
     Width = 225
     Height = 19
     Anchors = [akRight, akBottom]
@@ -1582,8 +1653,8 @@ inherited frm_Order: Tfrm_Order
     OnKeyDown = FormKeyDown
   end
   object btn_images: TButton
-    Left = 112
-    Top = 256
+    Left = 120
+    Top = 304
     Width = 105
     Height = 21
     Caption = #1048#1079#1086#1073#1088#1072#1078#1077#1085#1080#1103
@@ -1700,7 +1771,8 @@ inherited frm_Order: Tfrm_Order
       
         '          FK_ORDERS_ORGANISATIONS, ADDITIONALINFO, Disconnection' +
         's, HoodCount,  ShiftNumber, IS_PJATIHATKY,'
-      'FK_ORDERS_ADD_DAMAGELOCALITY'
+      'FK_ORDERS_ADD_DAMAGELOCALITY,'
+      'heightThread,SpeedQ,widthLot'
       ''
       '          from orders WHERE ID = :pID')
     Left = 88

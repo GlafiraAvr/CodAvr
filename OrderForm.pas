@@ -201,6 +201,13 @@ type
     lbl_withoutorder: TLabel;
     btn_flooding: TBitBtn;
     btn_images: TButton;
+    pnl_leak2: TPanel;
+    spewidthLot: TRxSpinEdit;
+    speheightThread: TRxSpinEdit;
+    speSpeedQ: TRxSpinEdit;
+    Label17: TLabel;
+    Label19: TLabel;
+    Label22: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btn_ExitClick(Sender: TObject);
     procedure btn_CloseOrderClick(Sender: TObject);
@@ -506,7 +513,11 @@ begin
     if (Sender is TRxSpinEdit) then
     begin
       if (Sender as TRxSpinEdit).Tag=111 then  //sp_LocationDepth; sp_Pressure; sp_Square
-        sp_FlowSpeed.Value:=0.62*3600*(sp_Square.Value/10000)*sqrt(20*max((10*sp_Pressure.Value-sp_LocationDepth.Value),0));
+        sp_FlowSpeed.Value:=0.62*3600*(sp_Square.Value/10000)*sqrt(20*max((10*sp_Pressure.Value-sp_LocationDepth.Value),0))
+       else   //новіе утечки
+       if (Sender as TRxSpinEdit).Tag=244 then
+         if (spewidthLot.Value>0) and (speheightThread.Value>0) and (speSpeedQ.Value>0) then
+           sp_FlowSpeed.Value:= 3600*spewidthLot.Value*speheightThread.Value*speSpeedQ.Value;
     end else
     if (Sender is TMaskEdit) then
       HelpFunctions.CorrectTimeEdit(Sender as TMaskEdit);
@@ -561,6 +572,15 @@ begin
     (sender as TDateEdit).Color := clLime;
     SetProcessStatus('Введите дату'+NEXT_POLE);
   end;
+  if (Sender is TRxSpinEdit) then
+  if (Sender as TRxSpinEdit).Tag = 11111 //Скорость утечки автомат
+   then
+    if (spewidthLot.Value>0) and (speheightThread.Value>0 )and(speSpeedQ.Value>0) then
+    begin
+      Application.MessageBox('Скорость утечки исправить нельзя если указаны "Ширина лотка", "Высота потока воды", "Скорость"!! Исправте значения Ширина лотка", "Высота потока воды", "Скорость"!',
+                            gc_strDispAVR, MB_OK+MB_ICONINFORMATION);
+       spewidthLot.SetFocus    ;
+    end;
 end;
 
 procedure Tfrm_Order.EntryExit(Sender: TObject);
@@ -767,15 +787,23 @@ begin
   dbl_ControlOrgs.Enabled:=value;
   cb_HoodCount.Enabled:=value;
   sp_FlowSpeed.Enabled:=value;
- 
+
   sp_LocationDepth.Enabled:=value;
   sp_Square.Enabled:=value;
   sp_Pressure.Enabled:=value;
+
+
 
   EnableLblOnGroupBox(gb_Top, value); // не проставляет checkbox
   cb_Pjatihatky.Enabled:=value;
   EnableLblOnGroupBox(gb_Adres, value);
   EnableLblOnPanel(pnl_LeakCalc, value);
+  EnableLblOnPanel(pnl_leak2, value); //2015 новая утечка
+
+  spewidthLot.Enabled:=value;
+  speheightThread.Enabled:=value;
+  speSpeedQ.Enabled:=value;
+
   EnableLblOnPanel(pnl_HoodCount, value);
 end;
 
@@ -1911,6 +1939,9 @@ begin
       sp_Square.Value:=FieldByName('Square').AsFloat;    //Площадь
       sp_Pressure.Value:=FieldByName('Pressure').AsFloat;    //Давление
       F_Disconnections:=trim(FieldbyName('Disconnections').AsString);  //Отключения
+      spewidthLot.value:=fieldbyname('widthLot').asFloat;
+      speheightThread.Value:=FieldByName('heightThread').asFloat;
+      speSpeedQ.Value:=FieldByName('SpeedQ').asFloat;//новые утечки шириина высоты скорость
       if not FieldByName('HoodCount').IsNull then
         cb_HoodCount.ItemIndex:=FieldByName('HoodCount').AsInteger - 1;
 
@@ -2020,6 +2051,12 @@ begin
       ValueByFieldName['FK_ORDERS_ORGANISATIONS']:=F_order.mt_organisation.FieldByName('ID').AsString;
       ValueByFieldName['LocationDepth']:=FixFloatStr(sp_LocationDepth.Text);
       ValueByFieldName['FlowSpeed']:=FixFloatStr(sp_FlowSpeed.Text);
+
+      //Новіе утечки
+      ValueByFieldName['widthLot']:=FixFloatStr(spewidthLot.Text);
+      ValueByFieldName['heightThread']:=FixFloatStr(speheightThread.Text);
+      ValueByFieldName['SpeedQ']:=FixFloatStr(speSpeedQ.Text);
+
 //      ValueByFieldName['Naled_Square']:=FixFloatStr(sp_Naled.Text);
       ValueByFieldName['Square']:=FixFloatStr(sp_Square.Text);
       ValueByFieldName['Pressure']:=FixFloatStr(sp_PRessure.Text);
@@ -2875,7 +2912,7 @@ begin
     if sp_FlowSpeed.Value>=100 then
       if Application.MessageBox('Вы уверены в правильности ввода скорости утечки?',
         gc_strDispAvr, MB_YESNO+MB_ICONQUESTION)<>ID_Yes then
-        sp_FlowSpeed.SetFocus;  
+        spewidthLot.SetFocus;
   end;
 end;
 
