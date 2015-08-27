@@ -136,6 +136,9 @@ inherited frm_OptPlanDep: Tfrm_OptPlanDep
   end
   object tran: TIBTransaction
     DefaultDatabase = DM_Main.IBDatabase
+    Params.Strings = (
+      'read'
+      'consistency')
     Left = 152
     Top = 32
   end

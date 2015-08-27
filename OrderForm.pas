@@ -513,7 +513,7 @@ begin
     if (Sender is TRxSpinEdit) then
     begin
       if (Sender as TRxSpinEdit).Tag=111 then  //sp_LocationDepth; sp_Pressure; sp_Square
-        sp_FlowSpeed.Value:=0.62*3600*(sp_Square.Value/10000)*sqrt(20*max((10*sp_Pressure.Value-sp_LocationDepth.Value),0))
+       // sp_FlowSpeed.Value:=0.62*3600*(sp_Square.Value/10000)*sqrt(20*max((10*sp_Pressure.Value-sp_LocationDepth.Value),0))
        else   //новіе утечки
        if (Sender as TRxSpinEdit).Tag=244 then
          if (spewidthLot.Value>0) and (speheightThread.Value>0) and (speSpeedQ.Value>0) then
@@ -521,7 +521,10 @@ begin
     end else
     if (Sender is TMaskEdit) then
       HelpFunctions.CorrectTimeEdit(Sender as TMaskEdit);
-
+   if (spewidthLot.Value>0) and (speheightThread.Value>0) and (speSpeedQ.Value>0) then
+    sp_FlowSpeed.ReadOnly:=true
+   else
+    sp_FlowSpeed.ReadOnly:=false;
 
 
     SetIsTopCtrlChange(true);
@@ -786,7 +789,8 @@ begin
   dbl_Damageplace.Enabled:=value;
   dbl_ControlOrgs.Enabled:=value;
   cb_HoodCount.Enabled:=value;
-  sp_FlowSpeed.Enabled:=value;
+  sp_FlowSpeed.Enabled:=value ;
+  sp_FlowSpeed.ReadOnly:=( (spewidthLot.Value>0) and (speheightThread.Value>0) and (speSpeedQ.Value>0)) ;
 
   sp_LocationDepth.Enabled:=value;
   sp_Square.Enabled:=value;

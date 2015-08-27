@@ -72,6 +72,12 @@ begin
    F_excav:=V[0];
    F_tripper:=V[1];
    F_pumping:=V[2];
+  end
+  else
+  begin
+   F_excav:=0;
+   F_tripper:=0;
+   F_pumping:=0;
   end;
  end;
  sp_excav.Value:=F_excav;

@@ -3163,7 +3163,8 @@ begin
   end else
   begin
     Result := true;
-
+    F_OptFrm.dset.Close;
+    F_OptFrm.tran.Rollback;
     F_Pind.Show;
     F_DM.DtBeg := F_OptFrm.dp_Date.Date;
 //    F_DM.DtEnd := F_OptFrm.frame_Dates.EndDate;

@@ -933,7 +933,10 @@ inherited frm_Order: Tfrm_Order
       Top = 196
       Width = 118
       Height = 21
+      ArrowKeys = False
       Decimal = 4
+      EditorEnabled = False
+      Increment = 0.000100000000000000
       MaxValue = 99999.000000000000000000
       ValueType = vtFloat
       TabOrder = 12
@@ -1430,6 +1433,8 @@ inherited frm_Order: Tfrm_Order
         Top = 8
         Width = 105
         Height = 21
+        Increment = 0.010000000000000000
+        MaxValue = 99999.000000000000000000
         ValueType = vtFloat
         TabOrder = 0
         OnChange = TopCtrlChange
@@ -1443,6 +1448,8 @@ inherited frm_Order: Tfrm_Order
         Top = 8
         Width = 105
         Height = 21
+        Increment = 0.010000000000000000
+        MaxValue = 9999.000000000000000000
         ValueType = vtFloat
         TabOrder = 1
         OnChange = TopCtrlChange
@@ -1456,6 +1463,8 @@ inherited frm_Order: Tfrm_Order
         Top = 8
         Width = 105
         Height = 21
+        Increment = 0.010000000000000000
+        MaxValue = 9999.000000000000000000
         ValueType = vtFloat
         TabOrder = 2
         OnChange = TopCtrlChange
