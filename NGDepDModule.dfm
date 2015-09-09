@@ -540,6 +540,10 @@ object dm_NGDep: Tdm_NGDep
       item
         Name = 'S_MT_CATEGORY_ID'
         DataType = ftSmallint
+      end
+      item
+        Name = 'activity'
+        DataType = ftSmallint
       end>
     Filtered = True
     IndexDefs = <>

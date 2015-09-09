@@ -1303,106 +1303,13 @@ inherited frm_Order: Tfrm_Order
       OnExit = EntryExit
       OnKeyDown = FormKeyDown
     end
-    object pnl_LeakCalc: TPanel
-      Left = 144
-      Top = 192
-      Width = 377
-      Height = 26
-      TabOrder = 13
-      object Label1: TLabel
-        Left = 10
-        Top = 1
-        Width = 66
-        Height = 26
-        Alignment = taCenter
-        Caption = #1043#1083#1091#1073#1080#1085#1072' '#1079#1072#1083#1086#1078#1077#1085#1080#1103
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ParentFont = False
-        WordWrap = True
-      end
-      object Label31: TLabel
-        Left = 127
-        Top = -1
-        Width = 60
-        Height = 26
-        Alignment = taCenter
-        Caption = #1044#1072#1074#1083#1077#1085#1080#1077#13#10'('#1072#1090#1084')'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label18: TLabel
-        Left = 265
-        Top = -2
-        Width = 62
-        Height = 26
-        Alignment = taCenter
-        Caption = #1055#1083#1086#1097#1072#1076#1100' '#13#10#1090#1077#1095#1080' ('#1089#1084'2)'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ParentFont = False
-        WordWrap = True
-      end
-      object sp_Pressure: TRxSpinEdit
-        Tag = 111
-        Left = 193
-        Top = 3
-        Width = 73
-        Height = 21
-        MaxValue = 100000.000000000000000000
-        ValueType = vtFloat
-        TabOrder = 1
-        OnChange = TopCtrlChange
-        OnEnter = EntryEnter
-        OnExit = EntryExit
-        OnKeyDown = FormKeyDown
-      end
-      object sp_Square: TRxSpinEdit
-        Tag = 111
-        Left = 330
-        Top = 3
-        Width = 71
-        Height = 21
-        MaxValue = 100000.000000000000000000
-        ValueType = vtFloat
-        TabOrder = 2
-        OnChange = TopCtrlChange
-        OnEnter = EntryEnter
-        OnExit = EntryExit
-        OnKeyDown = FormKeyDown
-      end
-      object sp_LocationDepth: TRxSpinEdit
-        Tag = 111
-        Left = 76
-        Top = 4
-        Width = 51
-        Height = 21
-        MaxValue = 100000.000000000000000000
-        ValueType = vtFloat
-        TabOrder = 0
-        OnChange = TopCtrlChange
-        OnEnter = EntryEnter
-        OnExit = EntryExit
-        OnKeyDown = FormKeyDown
-      end
-    end
     object pnl_leak2: TPanel
       Tag = 244
       Left = 8
       Top = 224
       Width = 593
       Height = 41
-      TabOrder = 14
+      TabOrder = 13
       object Label17: TLabel
         Left = 11
         Top = 8
@@ -1433,7 +1340,8 @@ inherited frm_Order: Tfrm_Order
         Top = 8
         Width = 105
         Height = 21
-        Increment = 0.010000000000000000
+        Decimal = 3
+        Increment = 0.001000000000000000
         MaxValue = 99999.000000000000000000
         ValueType = vtFloat
         TabOrder = 0
@@ -1448,6 +1356,7 @@ inherited frm_Order: Tfrm_Order
         Top = 8
         Width = 105
         Height = 21
+        Decimal = 3
         Increment = 0.010000000000000000
         MaxValue = 9999.000000000000000000
         ValueType = vtFloat
@@ -1463,6 +1372,7 @@ inherited frm_Order: Tfrm_Order
         Top = 8
         Width = 105
         Height = 21
+        Decimal = 3
         Increment = 0.010000000000000000
         MaxValue = 9999.000000000000000000
         ValueType = vtFloat

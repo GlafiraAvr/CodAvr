@@ -1164,20 +1164,39 @@ if dset_locality.Active then dset_locality.Close;
 end;
 
 function Tdm_NGDep.IsFieldsdatereglCorrect( var _ErrMsg: string ): boolean;
+function isnotdiamempty():boolean;
 begin
-  if (dset_dep.FieldByName('PLANDATEREGL').IsNull) and ( not dset_dep.FieldByName('FK_DIAMETER').IsNull)and (dset_dep.FieldByName('DEPNUMBER').AsInteger=1) then
- begin
-   result:=true;
-   exit;
- end;
- if dset_dep.FieldByName('STARTDATE').AsDateTime-1>dset_dep.FieldByName('PLANDATEREGL').AsDateTime then
-  begin
+  if not(dset_dep.FieldByName('FK_DIAMETER').IsNull) then
+   result:=(dset_dep.FieldByName('FK_DIAMETER').AsInteger>0)
+  else
    result:=false;
-   _ErrMsg:='ƒата регламента должна быть не меньше даты выезда!';
-    ShowMsg(_ErrMsg );
+end;
+var isdiam:boolean;
+begin
+  if (dset_dep.FieldByName('PLANDATEREGL').IsNull) then
+  begin
+    if (isnotdiamempty())and ((dset_dep.FieldByName('DEPNUMBER').AsInteger=1)) then
+    begin
+      result:=true;
+
+    end else
+    begin
+      result:=false;
+      _ErrMsg:='ƒату регламента удалить нельз€ не указав диаметр!!';
+      ShowMsg(_ErrMsg );
+    end
+
   end
   else
-   result:=true;
+  begin
+   if dset_dep.FieldByName('STARTDATE').AsDateTime-1>dset_dep.FieldByName('PLANDATEREGL').AsDateTime then
+    begin
+     result:=false;
+     _ErrMsg:='ƒата регламента должна быть не меньше даты выезда!';
+     ShowMsg(_ErrMsg );
+    end else
+     result:=true;
+  end;
 
 end;
 

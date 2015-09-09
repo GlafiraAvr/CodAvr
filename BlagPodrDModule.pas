@@ -37,6 +37,7 @@ type
     F_DtEnd: TDateTime;
     F_RegionsID: string;
     F_asfcompanyID:string;
+    Grant_dt :TDateTime;
     procedure FillResultDset;
     function AddFieldToMemTable(const AFieldName: string;
   AFieldClass: TFieldClass; ASize: Word; ACalculated: boolean; ADispLabel: string=''): TField;
@@ -90,15 +91,33 @@ var i: integer;
    endmonthyear:integer;
    month:integer;
 begin
-
+  Grant_dt:=StrToDate('01.01.'+IntTOStr(GetYear(F_DtBeg)-1));
   if F_RegionsID <> '' then RegCondition := ' and (o.fk_orders_regions in '+ F_RegionsID + ') '
       else RegCondition := '';
-
-  if F_asfcompanyID <> '' then AasfcompanyCond := ' and ( e.fk_excavations_asfcompany in '+ F_asfcompanyID + ') '
+ 
+  if F_asfcompanyID <> '' then AasfcompanyCond := ' and ( fk_asfcompany in '+ F_asfcompanyID + ') '
       else AasfcompanyCond := '';
-
-
-  MyOpenIBDS( Dset,
+   if pos('3',F_asfcompanyID)>0 then
+   begin
+     insert('(',AasfcompanyCond,pos('(',AasfcompanyCond));
+     AasfcompanyCond := ' '+AasfcompanyCond +' or (fk_asfcompany is null))';
+   end;  
+MyOpenIBDS(dset,
+          'select ''1'' MainGr, gb.ordernumber, '+
+          '(select name from s_regions sr where sr.id=o.fk_orders_regions) Regions, '+
+          ' (select adres from get_adres(o.fk_orders_housetypes,o.fk_orders_streets, '+
+            ' o.housenum,o.additionaladdress)) adres, '+
+          ' (select name from  s_damagelocality sd where sd.id=o.fk_orders_damagelocality) dlname, '+
+          ' gb.square, work_dt dtime, asfcompany, '+
+          ' coalesce (gb.asfcompany,(select name from s_asfcompany where id=3)) asfcompany, '+
+          '  coalesce( fk_asfcompany,3) fk_excavations_asfcompany '+
+          ' from GET_BLAG_PODR1(''' + DateToStr( Grant_dt ) + ''') gb '+
+          '  join  orders o on o.id=gb.id_order '+
+          ' where work_dt>''' + DateToStr(F_DtBeg ) + ''''+
+           ' and work_dt<''' + DateToStr(  F_DtEnd + 1 ) + ''''+
+           RegCondition+
+           AasfcompanyCond);
+ { MyOpenIBDS( Dset,
     ' select ''1'' MainGr, o.id, o.ordernumber' +
     ' , (select name from s_Regions where id=o.fk_orders_regions) Regions' +
     ' , (select adres from Get_adres(o.fk_orders_housetypes, o.fk_orders_streets,  o.housenum, o.additionaladdress)) adres' +
@@ -115,7 +134,7 @@ begin
      RegCondition+
     AasfcompanyCond +
     ' order by 2' );
-
+ }
   if ResultDset.Active then ResultDset.Close;
   ResultDset.Open;
 

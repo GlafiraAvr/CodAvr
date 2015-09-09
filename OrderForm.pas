@@ -171,16 +171,9 @@ type
     lbl_OrderNum: TLabel;
     btn_RestoreOpenState: TBitBtn;
     btn_Print: TBitBtn;
-    pnl_LeakCalc: TPanel;
-    Label1: TLabel;
-    Label31: TLabel;
-    sp_Pressure: TRxSpinEdit;
-    Label18: TLabel;
-    sp_Square: TRxSpinEdit;
     pnl_LocationDepth: TPanel;
     Label16: TLabel;
     sp_LocationDepthMirror: TRxSpinEdit;
-    sp_LocationDepth: TRxSpinEdit;
     btn_AvrOnMap: TBitBtn;
     pnl_AomInfo: TPanel;
     Label7: TLabel;
@@ -792,16 +785,16 @@ begin
   sp_FlowSpeed.Enabled:=value ;
   sp_FlowSpeed.ReadOnly:=( (spewidthLot.Value>0) and (speheightThread.Value>0) and (speSpeedQ.Value>0)) ;
 
-  sp_LocationDepth.Enabled:=value;
-  sp_Square.Enabled:=value;
-  sp_Pressure.Enabled:=value;
+//  sp_LocationDepth.Enabled:=value;
+//  sp_Square.Enabled:=value;
+//  sp_Pressure.Enabled:=value;
 
 
 
   EnableLblOnGroupBox(gb_Top, value); // не проставляет checkbox
   cb_Pjatihatky.Enabled:=value;
   EnableLblOnGroupBox(gb_Adres, value);
-  EnableLblOnPanel(pnl_LeakCalc, value);
+ // EnableLblOnPanel(pnl_LeakCalc, value);
   EnableLblOnPanel(pnl_leak2, value); //2015 новая утечка
 
   spewidthLot.Enabled:=value;
@@ -865,12 +858,12 @@ begin
   ResetDBL(dbl_DamagePlace);
   ResetDBL(dbl_DamageLocality_2);
   ResetDBL(dbl_ControlOrgs);
-  sp_LocationDepth.Value:=0;
-  sp_LocationDepth.Tag:=111;
+  //sp_LocationDepth.Value:=0;
+//  sp_LocationDepth.Tag:=111;
   sp_FlowSpeed.Value:=0;
 
-  sp_Pressure.Value:=0;
-  sp_Square.Value:=0;
+//  sp_Pressure.Value:=0;
+//  sp_Square.Value:=0;
 end;
 
 procedure Tfrm_Order.ResetBottomCtrls;
@@ -1936,12 +1929,12 @@ begin
       FixDBLValue(FieldByName('FK_ORDERS_DAMAGELOCALITY').AsInteger, dbl_DamageLocality); //Местность повреждения
       FixDBLValue(FieldByName('FK_ORDERS_DAMAGEPLACE').AsInteger, dbl_Damageplace); //Место повреждения
       FixDBLValue(FieldByName('FK_ORDERS_ORGANISATIONS').AsInteger, dbl_ControlOrgs);  //Заявка на контроле
-      sp_LocationDepth.Value:=FieldByName('LocationDepth').AsFloat;  //Глубина заложения
+//      sp_LocationDepth.Value:=FieldByName('LocationDepth').AsFloat;  //Глубина заложения
       sp_LocationDepthMirror.Value:=FieldByName('LocationDepth').AsFloat;
       sp_FlowSpeed.Value:=FieldByName('FlowSpeed').AsFloat;  //Q
 //      sp_Naled.Value := FieldByName('Naled_Square').AsFloat; // Наледь
-      sp_Square.Value:=FieldByName('Square').AsFloat;    //Площадь
-      sp_Pressure.Value:=FieldByName('Pressure').AsFloat;    //Давление
+//      sp_Square.Value:=FieldByName('Square').AsFloat;    //Площадь
+//      sp_Pressure.Value:=FieldByName('Pressure').AsFloat;    //Давление
       F_Disconnections:=trim(FieldbyName('Disconnections').AsString);  //Отключения
       spewidthLot.value:=fieldbyname('widthLot').asFloat;
       speheightThread.Value:=FieldByName('heightThread').asFloat;
@@ -2053,7 +2046,7 @@ begin
       ValueByFieldName['FK_ORDERS_ADD_DAMAGELOCALITY']:=F_order.mt_DamageLocality_2.FieldByName('ID').AsString;
       ValueByFieldName['FK_ORDERS_DAMAGEPLACE']:=F_order.mt_DamagePlace.FieldByName('ID').AsString;
       ValueByFieldName['FK_ORDERS_ORGANISATIONS']:=F_order.mt_organisation.FieldByName('ID').AsString;
-      ValueByFieldName['LocationDepth']:=FixFloatStr(sp_LocationDepth.Text);
+//      ValueByFieldName['LocationDepth']:=FixFloatStr(sp_LocationDepth.Text);
       ValueByFieldName['FlowSpeed']:=FixFloatStr(sp_FlowSpeed.Text);
 
       //Новіе утечки
@@ -2062,8 +2055,8 @@ begin
       ValueByFieldName['SpeedQ']:=FixFloatStr(speSpeedQ.Text);
 
 //      ValueByFieldName['Naled_Square']:=FixFloatStr(sp_Naled.Text);
-      ValueByFieldName['Square']:=FixFloatStr(sp_Square.Text);
-      ValueByFieldName['Pressure']:=FixFloatStr(sp_PRessure.Text);
+//      ValueByFieldName['Square']:=FixFloatStr(sp_Square.Text);
+ //     ValueByFieldName['Pressure']:=FixFloatStr(sp_PRessure.Text);
       ValueByFieldName['Disconnections']:=QuotedStr(F_Disconnections);
 
       if FixAction=faInsert then
@@ -2733,16 +2726,16 @@ end;
 
 procedure Tfrm_Order.VisibleLeakCalc(Value: boolean);
 begin
-  pnl_LeakCalc.BevelOuter:=bvNone;
+{  pnl_LeakCalc.BevelOuter:=bvNone;
   pnl_LeakCalc.Visible:=Value;
   pnl_LocationDepth.BevelOuter:=bvNone;
-  pnl_LocationDepth.Visible:=not Value;
+  pnl_LocationDepth.Visible:=not Value;}
 end;
 
 procedure Tfrm_Order.sp_LocationDepthMirrorChange(Sender: TObject);
 begin
-  sp_LocationDepth.Tag:=0;
-  sp_LocationDepth.Value:=sp_LocationDepthMirror.Value;
+{  sp_LocationDepth.Tag:=0;
+  sp_LocationDepth.Value:=sp_LocationDepthMirror.Value;}
 end;
 
 class function Tfrm_Order.GetGUID: string;

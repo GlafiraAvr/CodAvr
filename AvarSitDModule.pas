@@ -181,7 +181,7 @@ procedure Tdm_AvarSit.FillResultSvodDset;
 var i:integer;
     strdata:string;
     curdate:TDate;
-  function setstartdate():string;
+  function setstartdate():string;    //данн≥е 1 день мес€ца -1
     var year,month,day:word;
     date:TDate;
   begin
@@ -195,7 +195,9 @@ var i:integer;
    else
      month:=month-1;}
     date:=encodedate(year,month,1);
+
     resuLt:='01.'+intToStr(month)+'.'+IntToStr(year);
+    resuLt:=DateToStr(date-1);
 
   end;
   function isdatewrite() :boolean;
@@ -301,14 +303,14 @@ dset.Close; }
   ResultSvod.Post;
  end;
  {–едактирем предпосл строку заполн€ем посленюю}
-if DayOf(F_DtBeg)>1 then
-begin
+//if DayOf(F_DtBeg)>1 then
+//begin
  ResultSvod.Edit;
  ResultSvod.FieldByName('vipoln').AsInteger:=likv;
  postup:=vsego-ResultSvod.FieldByName('vsego').AsInteger+likv;
  ResultSvod.FieldByName('postup').AsInteger:=postup;
  ResultSvod.Post;
-end;
+//end;
  ResultSvod.Append;
  ResultSvod.FieldByName('data').asstring:=DateToStr(F_DtBeg);
  ResultSvod.FieldByName('vipoln').AsInteger:=0;
