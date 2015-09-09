@@ -74,6 +74,10 @@ inherited dm_AvarSit: Tdm_AvarSit
       FieldName = 'withoutExcav'
       Size = 50
     end
+    object ResultDsetRedLine: TStringField
+      FieldName = 'RedLine'
+      Size = 3
+    end
   end
   object ResultSvod: TRxMemoryData
     FieldDefs = <>

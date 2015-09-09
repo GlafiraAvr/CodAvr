@@ -41,6 +41,7 @@ type
     IBSQL_inst: TIBSQL;
     ResultDsetwithoutExcav: TStringField;
     ResultDsetplandateregl: TStringField;
+    ResultDsetRedLine: TStringField;
   private
     { Private declarations }
     
@@ -126,6 +127,7 @@ if  ResultDset.Active then
     ' ,o.fk_orders_damageplace damageplace '+
     ' ,sd.DIAMETER '+
     ' ,o.FK_ORDERS_OFF_WITHOUTEXCAV '+
+    ' ,o.is_redLine '+
     '   from orders o join departures dd on (dd.fk_departures_orders = o.id and dd.depnumber = 1 ) '+
 
     '  left join S_TUBEDIAMETER sd on sd.id =dd.FK_DIAMETER'+
@@ -139,9 +141,10 @@ if  ResultDset.Active then
     while  not dset.Eof do
     begin
      ResultDset.Append;
-     for  i:=0 to   ResultDset.FieldCount-1 do
+     for  i:=0 to   ResultDset.FieldCount-2 do
      begin
-       if ResultDset.Fields[i].FieldName<>'withoutExcav' then
+       if (ResultDset.Fields[i].FieldName<>'withoutExcav') and
+          (ResultDset.Fields[i].FieldName<>'RedLine')then
        ResultDset.Fields[i].AsVariant:=dset.fieldbyname( ResultDset.Fields[i].FieldName).AsVariant;
        if ResultDset.Fields[i].FieldName='plandateregl' then
          ResultDset.Fields[i].AsString:=CorrectDate(dset.fieldbyname( ResultDset.Fields[i].FieldName).AsDateTime);
@@ -166,6 +169,12 @@ if  ResultDset.Active then
      else
       ResultDset.FieldByName('withoutExcav').AsString:='';
 
+      //Установим красную линию
+
+     ResultDset.FieldByName('RedLine').AsString:='';
+     if not dset.FieldByName('is_redLine').IsNull then
+      if dset.FieldByName('is_redLine').AsInteger=1 then
+       ResultDset.FieldByName('RedLine').AsString:='Да';
      {Подщитаем для нижней таблицы}
 
      if not ResultDset.Fieldbyname('dateclosed').IsNull then
