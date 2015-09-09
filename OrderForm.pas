@@ -201,6 +201,9 @@ type
     Label17: TLabel;
     Label19: TLabel;
     Label22: TLabel;
+    Label1: TLabel;
+    lbl_redLine: TLabel;
+    cb_RedLine: TComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btn_ExitClick(Sender: TObject);
     procedure btn_CloseOrderClick(Sender: TObject);
@@ -774,6 +777,8 @@ begin
   dbl_Street.Enabled:=value;
   dbl_Street2.Enabled:=value;
   ed_Housenum.Enabled:=value;
+  cb_RedLine.Enabled:=value;
+  
   dbl_MessageType.Enabled:=value;
   ed_Abonent.Enabled:=value;
   cb_IsPayed.Enabled:=value;
@@ -851,6 +856,7 @@ begin
   ResetDBL(dbl_Street);
   ResetDBL(dbl_Street2);
   ed_HouseNum.Text:='';
+  cb_RedLine.ItemIndex:=0;
   ResetDBL(dbl_MessageType);
   ed_Abonent.Text:='';
   cb_IsPayed.ItemIndex:=0;
@@ -1944,12 +1950,16 @@ begin
 
       if not FieldByName('IS_PJATIHATKY').IsNull then
          cb_Pjatihatky.Checked := ( FieldByName('IS_PJATIHATKY').AsInteger = 1 );
+
       FixDBLValue(FieldByName('FK_ORDERS_ADD_DAMAGELOCALITY').AsInteger, dbl_DAMAGELOCALITY_2); //Место повреждения 11.03.2013
 //      IS_PJATIHATKY
+      cb_redLine.itemIndex:=FieldByName('is_RedLine').asInteger;   //Красная линия
+      
       F_Order.Edit;
       F_Order.FieldByName( 'DateComing' ).AsDateTime := FieldByName( 'DateComing' ).AsDateTime;
       F_Order.FieldByName( 'ShiftNumber' ).AsInteger := FieldByName( 'ShiftNumber' ).AsInteger;
       F_Order.FieldByName( 'RegionID' ).AsInteger := FieldByName('FK_ORDERS_REGIONS').AsInteger;
+
 
       F_Order.Post;
 
@@ -2070,6 +2080,8 @@ begin
 
       if (cb_Pjatihatky.Checked) then ValueByFieldName['IS_PJATIHATKY'] := '1'
           else ValueByFieldName['IS_PJATIHATKY'] := '0';
+
+      ValueByFieldName['is_redLine']:=IntToStr(cb_RedLine.ItemIndex);
 
       TableName:='orders';
       Condition:='id='+IntToStr(F_OrderID);
