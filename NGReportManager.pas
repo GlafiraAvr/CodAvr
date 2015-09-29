@@ -12,7 +12,8 @@ type
     rnAVRDisconn, rnSheben, rnNODSBezVody, rnPovrRegion, rnRazrtDep, rnBlag3GIK, rnInfBlag, rnObrZas
     ,rnRSvodved,rnblagRasr,rnPlanTexnik,rnSPlanWorks, rnSvPoZayav,rnBlagSvod,
     rnSodVed_1562ns, rnRepGreenSpring,rnDisconSite,rnREport1321,rnReport13192,rnExcavOrderTable,
-    rnApplicationForSbit, rnTDamageBlagObject, rnGetToDoNar, rnAllReport1);
+    rnApplicationForSbit, rnTDamageBlagObject, rnGetToDoNar, rnAllReport1,
+    rnOptZvCloseOrder);
 
   TNGReportManager=class
   private
@@ -79,6 +80,7 @@ begin
     rnTDamageBlagObject:   Result:=TDamageBlagObject.Create; //Информация по нарушению благоустройства
     rnGetToDoNar       :   Result:=TGetToDoNar.Create;        //Информация о принятых и выполненных нарядах
     rnAllReport1       :   Result:=TReportAll1.Create;       //Комплекс Харькковводоснабжение отчет
+    rnOptZvCloseOrder :    Result:=TZvCloseOrder.Create;     //Незакрытые заявки с закрытым ордером
 
     end;
 end;

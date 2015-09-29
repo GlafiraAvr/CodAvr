@@ -7,7 +7,7 @@ object DM_Main: TDM_Main
   Width = 482
   object IBDatabase: TIBDatabase
     Connected = True
-    DatabaseName = 'E:\bases\avr_13.07.2015\AVR_KH_NEW.GDB'
+    DatabaseName = 'E:\bases\avr_06.08.2015\AVR_KH_NEW.GDB'
     Params.Strings = (
       'user_name=avr_ib'
       'password=avr_ib_pwd'

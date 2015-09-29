@@ -400,7 +400,9 @@ uses
   DamageBlagObjectDModule in 'DamageBlagObjectDModule.pas' {Tdm_DamageBlagObject: TDataModule},
   OptGetToDoNar in 'from_VDS\OptGetToDoNar.pas' {frm_OptGetToDoNar},
   GetToDoNarDMobule in 'from_VDS\GetToDoNarDMobule.pas' {dm_GetToDoNar: TDataModule},
-  ReportAll1Dmodule in 'ReportAll1Dmodule.pas' {dm_ReportAll1: TDataModule};
+  ReportAll1Dmodule in 'ReportAll1Dmodule.pas' {dm_ReportAll1: TDataModule},
+  ZvClosedOrderDModule in 'ZvClosedOrderDModule.pas' {dm_ZvClosedOrder: TDataModule},
+  OptZvCloseOrderForm in 'OptZvCloseOrderForm.pas' {frm_OptZvCloseOrder};
 
 {$R *.RES}
 
@@ -429,6 +431,8 @@ begin
   Application.CreateForm(Tfrm_OptGetToDoNar, frm_OptGetToDoNar);
   Application.CreateForm(Tdm_GetToDoNar, dm_GetToDoNar);
   Application.CreateForm(Tdm_ReportAll1, dm_ReportAll1);
+  Application.CreateForm(Tdm_ZvClosedOrder, dm_ZvClosedOrder);
+  Application.CreateForm(Tfrm_OptZvCloseOrder, frm_OptZvCloseOrder);
   // Application.CreateForm(Tdm_RepSvodVed_vds_new_per, dm_RepSvodVed_vds_new_per);
   //  Application.CreateForm(Tfrm_OptRSvod, frm_OptRSvod);
  // Application.CreateForm(Tdm_RSvodved, dm_RSvodved);

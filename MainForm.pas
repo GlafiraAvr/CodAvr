@@ -493,6 +493,7 @@ begin
    AddNgRepToMenu(mi_Svodki_vds,'Сводка заявок для сбыта', rnApplicationForSbit);
    AddNgRepToMenu(mi_Svodki2,'Информация повреждений  благоустройства ', rnTDamageBlagObject);
    AddNgRepToMenu(mi_Svodki2,'Комплекс Харькковводоснабжение отчет',rnAllReport1);
+   AddNgRepToMenu(mi_Svodki2,'Незакрытые заявки с закрытым ордером',rnOptZvCloseOrder);
 
 
     {/Заполняем меню "Сводки"}

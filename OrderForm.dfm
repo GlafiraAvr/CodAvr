@@ -698,7 +698,7 @@ inherited frm_Order: Tfrm_Order
     TabOrder = 0
     object Label4: TLabel
       Left = 16
-      Top = 155
+      Top = 123
       Width = 57
       Height = 26
       Alignment = taCenter
@@ -713,7 +713,7 @@ inherited frm_Order: Tfrm_Order
     end
     object Label5: TLabel
       Left = 273
-      Top = 153
+      Top = 121
       Width = 28
       Height = 26
       Caption = #1040#1073#1086'-'#13#10#1085#1077#1085#1090
@@ -740,7 +740,7 @@ inherited frm_Order: Tfrm_Order
     end
     object Label12: TLabel
       Left = 17
-      Top = 179
+      Top = 155
       Width = 42
       Height = 26
       Caption = #1052#1077#1089#1090#1085'. '#1087#1086#1074#1088'.'
@@ -892,8 +892,8 @@ inherited frm_Order: Tfrm_Order
       OnTopClick = sb_DateComingTopClick
     end
     object Label13: TLabel
-      Left = 328
-      Top = 179
+      Left = 327
+      Top = 151
       Width = 42
       Height = 26
       Caption = #1052#1077#1089#1090#1085'. '#1088#1103#1076#1086#1084
@@ -905,9 +905,16 @@ inherited frm_Order: Tfrm_Order
       ParentFont = False
       WordWrap = True
     end
+    object lbl_redLine: TLabel
+      Left = 16
+      Top = 184
+      Width = 90
+      Height = 13
+      Caption = #1050#1088#1072#1089#1085#1072#1103' '#1083#1080#1085#1080#1103
+    end
     object ed_Abonent: TEdit
       Left = 304
-      Top = 156
+      Top = 124
       Width = 118
       Height = 21
       MaxLength = 31
@@ -1011,7 +1018,7 @@ inherited frm_Order: Tfrm_Order
     end
     object dbl_DamageLocality: TRxDBLookupCombo
       Left = 63
-      Top = 183
+      Top = 151
       Width = 250
       Height = 23
       DropDownCount = 8
@@ -1027,7 +1034,7 @@ inherited frm_Order: Tfrm_Order
     object dbl_MessageType: TRxDBLookupCombo
       Tag = 333
       Left = 76
-      Top = 157
+      Top = 125
       Width = 184
       Height = 23
       DropDownCount = 8
@@ -1080,7 +1087,7 @@ inherited frm_Order: Tfrm_Order
       Left = 3
       Top = 55
       Width = 606
-      Height = 90
+      Height = 66
       TabOrder = 4
       object Label2: TLabel
         Left = 5
@@ -1136,13 +1143,6 @@ inherited frm_Order: Tfrm_Order
         Font.Style = [fsBold]
         ParentFont = False
         Visible = False
-      end
-      object lbl_redLine: TLabel
-        Left = 8
-        Top = 64
-        Width = 90
-        Height = 13
-        Caption = #1050#1088#1072#1089#1085#1072#1103' '#1083#1080#1085#1080#1103
       end
       object dbl_Street2: TRxDBLookupCombo
         Tag = 11111
@@ -1250,23 +1250,6 @@ inherited frm_Order: Tfrm_Order
         TabOrder = 5
         OnClick = TopCtrlChange
         OnKeyDown = FormKeyDown
-      end
-      object cb_RedLine: TComboBox
-        Left = 108
-        Top = 61
-        Width = 69
-        Height = 21
-        ItemHeight = 13
-        ItemIndex = 0
-        TabOrder = 6
-        Text = #1053#1077#1090
-        OnChange = TopCtrlChange
-        OnEnter = EntryEnter
-        OnExit = EntryExit
-        OnKeyDown = FormKeyDown
-        Items.Strings = (
-          #1053#1077#1090
-          #1044#1072)
       end
     end
     object pnl_HoodCount: TPanel
@@ -1413,6 +1396,23 @@ inherited frm_Order: Tfrm_Order
         OnExit = EntryExit
         OnKeyDown = FormKeyDown
       end
+    end
+    object cb_RedLine: TComboBox
+      Left = 116
+      Top = 181
+      Width = 69
+      Height = 21
+      ItemHeight = 13
+      ItemIndex = 0
+      TabOrder = 14
+      Text = #1053#1077#1090
+      OnChange = TopCtrlChange
+      OnEnter = EntryEnter
+      OnExit = EntryExit
+      OnKeyDown = FormKeyDown
+      Items.Strings = (
+        #1053#1077#1090
+        #1044#1072)
     end
   end
   object btn_Excavations: TButton
@@ -1582,8 +1582,8 @@ inherited frm_Order: Tfrm_Order
     end
   end
   object dbl_DamageLocality_2: TRxDBLookupCombo
-    Left = 376
-    Top = 173
+    Left = 378
+    Top = 144
     Width = 209
     Height = 23
     DropDownCount = 8

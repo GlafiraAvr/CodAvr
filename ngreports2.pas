@@ -6,7 +6,8 @@ uses Classes, Controls, Variants, NGBaseReport, SvodkaGikForm, SvodkaGikDModule,
      FR_DSet, SysUtils, ProgressForm,ExcavOrderTableDModule,OptBlag2Form, FrPreviewForm,
      ApplicationForSbitDmodule,ApplicationForSbitOptForm ,RightsManagerDModule,
      DateSelForm , DamageBlagObjectDModule,
-     ReportAll1Dmodule   ;
+     ReportAll1Dmodule,
+     ZvClosedOrderDModule,OptZvCloseOrderForm  ;
 
 
  type
@@ -56,6 +57,21 @@ uses Classes, Controls, Variants, NGBaseReport, SvodkaGikForm, SvodkaGikDModule,
   private
     F_DM: Tdm_ReportAll1;
     F_optFrm: Tfrm_DateSel;
+    F_previewFrm:Tfrm_FrPreview;
+  protected
+    procedure InitFields; override;
+    procedure CreateForms; override;
+    procedure PrePareResultFormBtns;
+    procedure PrepareFastReport; override;
+  public
+    function Execute: boolean; override;
+  end;
+
+
+   TZvCloseOrder = class (TNgBaseReport)  //Ќезакрытые за€вки с закрытым ордером
+  private
+    F_DM: Tdm_ZvClosedOrder;
+    F_optFrm: Tfrm_OptZvCloseOrder;
     F_previewFrm:Tfrm_FrPreview;
   protected
     procedure InitFields; override;
@@ -370,5 +386,56 @@ end;
 
 
 
+
+{ TZvCloseOrder }
+
+procedure TZvCloseOrder.CreateForms;
+begin
+  inherited;
+  F_OptFrm:=CreateOptionForm(Tfrm_OptZvCloseOrder, F_Name) as Tfrm_OptZvCloseOrder;
+  F_DM := CreateDataModule(  Tdm_ZvClosedOrder ) as  Tdm_ZvClosedOrder;
+
+  F_PreviewFrm:=Tfrm_FrPreview.Create(F_DM, F_DM.frReport);
+end;
+
+function TZvCloseOrder.Execute: boolean;
+begin
+   result:=false;
+   try
+    if F_OptFrm.ShowModal<>mrOk then exit;
+    F_Dm.dt1:=F_OptFrm.Date1;
+    F_Dm.dt2:=F_OptFrm.Date2;
+    F_Pind.Show;
+    try
+      if F_dm.prepareDsets() then
+        PrepareAndPrintFR( F_DM.frReport );
+    finally
+     F_Pind.Hide;
+    end;
+    result:=true;
+   except
+    result:=false;
+   end;
+end;
+
+procedure TZvCloseOrder.InitFields;
+begin
+  inherited;
+  F_Name := 'Ќезакрытые за€вки с закрытым ордером';
+  F_ReportFileName := 'RepOptZvCloseOrder.frf';
+end;
+
+procedure TZvCloseOrder.PrepareFastReport;
+begin
+  inherited;
+  frVariables['Date1']:=DateTimeToStr(F_DM.dt1);
+  frVariables['Date2']:=DateTimeToStr(F_DM.dt2);
+
+end;
+
+procedure TZvCloseOrder.PrePareResultFormBtns;
+begin
+
+end;
 
 end.
