@@ -4,16 +4,16 @@ unit workSQL;
 interface
 
 uses
-  SysUtils, Classes,DModule, DB, ADODB;
+  SysUtils, Classes,DModule, DB, ADODB,Variants;
 
 
 type
   Tdm_workSQL = class(TDataModule)
     ADOQuery1562: TADOQuery;
-    ADOSP_RallBack1562: TADOStoredProc;
     ADOSP_Import_Denied: TADOStoredProc;
     ADOSP_DirTelRequestInOch: TADOStoredProc;
     ADOSP_Resived1562: TADOStoredProc;
+    ADOSP_RallBack1562: TADOStoredProc;
   private
       { Private declarations }
 
@@ -59,7 +59,7 @@ begin
            if dateopen>0 then
              ADOSP_Resived1562.Parameters.ParamValues['@order_createdate']:=dateopen
            else
-             ADOSP_Resived1562.Parameters.ParamValues['@order_createdate']:=VarNull;
+             ADOSP_Resived1562.Parameters.ParamValues['@order_createdate']:=Null;
         {$ifdef Sentto1562}
         ADOSP_Resived1562.ExecProc;
         v:=ADOSP_Resived1562.Parameters.ParamValues['@error_message'];
@@ -111,10 +111,21 @@ begin
           ParamValues['@inSystemRollback']:=id_App;
           ParamValues['@fk_disp']:=g_IDOfficial;    //23.07.2013
           if findParam('@number_order')<>nil then
-           ParamValues['@number_order']:=OrderNumber;
+           if OrderNumber<>'' then
+            ParamValues['@number_order']:=OrderNumber
+           else
+            ParamValues['@number_order']:=null;
+          if  Id_order=0 then
+            ParamValues['@id_order']:=NULL
+          else
+            ParamValues['@id_order']:=id_order;
+
 
           if FindParam('@order_createdate')<>nil then
-           ParamValues['@order_createdate']:=DateOpen;
+           if DateOpen>0 then
+             ParamValues['@order_createdate']:=DateOpen
+           else
+             ParamValues['@order_createdate']:=NULL;
         end;
         ADOSP_RallBack1562.ExecProc;
         v:=ADOSP_RallBack1562.Parameters.ParamValues['@error_message'];

@@ -45,4 +45,10 @@ inherited dm_ReportAll1: Tdm_ReportAll1
     Left = 24
     Top = 144
   end
+  object IBSQL_inst: TIBSQL
+    Database = DM_Main.IBDatabase
+    Transaction = tran
+    Left = 208
+    Top = 88
+  end
 end

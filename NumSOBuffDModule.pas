@@ -125,12 +125,12 @@ begin
   if not mt_BuffData.FieldByName( 'del_state' ).IsNull  then
     if  mt_BuffData.FieldByName( 'del_state' ).AsInteger=0 then
      begin //отсылка отказа без смены службы
-      dm_workSQL.RallBack1562(mt_BuffData[ 'id_1562' ],  mt_BuffData[ 'id_order' ],app,f_OrderNumber,F_DateOrder);
+      dm_workSQL.RallBack1562(mt_BuffData[ 'id_1562' ],  0,app,'',0);
      end
      else
      begin  //отсылка отказа co сменой службы
       app:=abs(app-1);
-      dm_workSQL.RallBack1562(mt_BuffData[ 'id_1562' ],  mt_BuffData[ 'id_order' ],app,f_OrderNumber,F_DateOrder);
+      dm_workSQL.RallBack1562(mt_BuffData[ 'id_1562' ], 0,app,'',0);
      end;
  end;
 

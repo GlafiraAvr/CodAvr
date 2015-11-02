@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, NGReportBaseDModule, FR_Class, DB, RxMemDS,DModule, IBDatabase,
-  IBCustomDataSet, FR_DSet, FR_DBSet;
+  IBCustomDataSet, FR_DSet, FR_DBSet, IBSQL;
 
 type
   Tdm_ReportAll1 = class(Tdm_NGReportBase)
@@ -17,6 +17,7 @@ type
     rm_Planresult: TStringField;
     frDBDataSet1: TfrDBDataSet;
     frDBDataSet2: TfrDBDataSet;
+    IBSQL_inst: TIBSQL;
   private
     { Private declarations }
     F_ShiftDate:TDate; //Дата сверху
@@ -40,6 +41,7 @@ type
     property planbrig :integer read f_planbrig;
     property planExcav :integer read f_excav;
     function ExportFRToExcel(fr_rep: TfrReport;excel_file_name: string): boolean;
+    function SaveAfterSend(file_name:string):boolean;
   end;
 const
    SQL_AvarSit='select sdate, trim(FIELDNAME) FIELDNAME,FIELDVALUE from SvodAvarsit where Sdate between ''%s'' and  ''%s''';
@@ -252,6 +254,25 @@ begin
    result:=false;
  end;
 
+end;
+
+function Tdm_ReportAll1.SaveAfterSend(file_name: string): boolean;
+var s:string;
+begin
+ Result:=false;
+  try
+
+   if  tran.InTransaction then
+    tran.Rollback;
+   tran.StartTransaction;
+   IBSQL_inst.SQL.Text:='update SENTSVEMAIL set file_name='''+file_name +''' where id=6';
+   IBSQL_inst.exeCQuery;
+   tran.Commit;
+  Result:=true;
+  except
+   if tran.InTransaction then
+    tran.Rollback;
+  end;
 end;
 
 end.

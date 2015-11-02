@@ -41,7 +41,7 @@ type
   _Excav:boolean=false;id_dep:integer=-1 );
  destructor Destroy(); override;
  function QuestionClosed1562(var mess:string):integer; {0-Ошибка -1-Отменено пользователем 1-Закрыть}
- function Closed1562(var mess:string):integer; {0-Ошибка -1-Отменено пользователем 1-Закрыть}
+ //function Closed1562(var mess:string):integer; {0-Ошибка -1-Отменено пользователем 1-Закрыть}
  function doClosed1562():integer;
  property Cap_Rem:boolean write F_cap_rem;
 
@@ -85,7 +85,7 @@ end;
 
 
 
-function TManClosed1562.Closed1562(var mess:string):integer;
+{function TManClosed1562.Closed1562(var mess:string):integer;
 var
  _062_list,_062_listview,list_1562:String;
  list_tel:TStringList;
@@ -205,7 +205,7 @@ begin
    end;
 
 
-end;
+end; }
 
 function  TManClosed1562.AddCanselInfo():integer;   //30.05.2012 Glasha
 var _062_list, _062_list_tel:TstringList;

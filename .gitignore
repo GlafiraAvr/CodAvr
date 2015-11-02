@@ -16,7 +16,18 @@ cookies.xml
 .gitignore
 *.txt
 *.frp
+*.dcu
 baza/*
+ZIPTV6/*
+voc_prav/*
+s
+dsd
+rer
+VocCache/*
+ABON/
+AppErrPics/
+*.exe
+avr_arm.exe
 
 
 # except foo.html which is maintained by hand.

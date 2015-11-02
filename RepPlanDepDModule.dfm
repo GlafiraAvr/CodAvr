@@ -159,6 +159,10 @@ inherited dm_PlanDep: Tdm_PlanDep
   end
   object tran_ex: TIBTransaction
     DefaultDatabase = DM_Main.IBDatabase
+    Params.Strings = (
+      'read_committed'
+      'rec_version'
+      'nowait')
     Left = 200
     Top = 88
   end
