@@ -108,6 +108,7 @@ type
     dbl_banceKeeper: TRxDBLookupCombo;
     dset_balanceKeeper: TIBDataSet;
     ds_BalanceKeeper: TDataSource;
+    btn_image: TButton;
     procedure btn_InsertClick(Sender: TObject);override;
     procedure btn_PostClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -130,6 +131,7 @@ type
     procedure DE_DTTM_ExordKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DE_DTTM_ExordClick(Sender: TObject);
+    procedure btn_imageClick(Sender: TObject);
   protected
     class function GetGUID: string; override;
   protected
@@ -172,13 +174,19 @@ type
     property IDEquip: integer read F_IDEquip write F_IDEquip;
 
     property CurrentBrigCloseFromOrder: integer read FCurrentBrigCloseFromOrder write FCurrentBrigCloseFromOrder;
+   private
+    F_orderNumber:integer;
+    F_year:integer;
+   public
+    property orderNumber:integer write F_orderNumber;
+    property year:integer write F_year;
   end;
 
 implementation
 
 {$R *.dfm}
 
-uses HelpFunctions, HelpClasses, AppGUIDS, RightsManagerDModule, StringConsts;
+uses HelpFunctions, HelpClasses, AppGUIDS, RightsManagerDModule, StringConsts,Image_main;
 
 { Tfrm_Excavations }
 
@@ -990,5 +998,33 @@ begin
 end;
 
 
+
+procedure Tfrm_Excavations.btn_imageClick(Sender: TObject);
+var   frm_picters: Tfrm_picters;
+
+begin
+  inherited;
+ if dset_main.RecordCount=0 then begin
+     Application.MessageBox('Сначала введите раскопку!',gc_strDispAVR, MB_OK+MB_ICONERROR);
+    exit;
+   end;
+  // if F_IsReadOnly then exit;
+   try
+     frm_picters:= Tfrm_picters.Create(self);
+     try
+       frm_picters.Order_id:=F_OrderID;
+       frm_picters.OrderNumber:=F_OrderNumber;
+       frm_picters.Year:=F_year;
+       frm_picters._ReadOnly:=F_ReadOnly;
+       frm_picters.excav:=true;
+       frm_picters.ShowModal;
+     finally
+       frm_picters.Free;
+     end;
+  except on e:exception do
+   Application.MessageBox('Ошибка форма изображений!',gc_strDispAVR,MB_OK+MB_ICONERROR);
+
+  end;
+end;
 
 end.

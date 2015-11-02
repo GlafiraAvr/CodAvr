@@ -4,7 +4,8 @@ interface
 
 uses
   SysUtils, Classes, FR_Class, Forms, Windows, IBDatabase, DB,
-  IBCustomDataSet, DModule, FR_DSet, FR_DBSet;
+  IBCustomDataSet, DModule, FR_DSet, FR_DBSet, RxMemDS,AvrPictersDModule,
+  kbmMemTable;
 
 type
   TPrintingDoc=(pdPropusk, pdOrder, pdOrder_vds);
@@ -41,12 +42,20 @@ type
     dset_discon_vdsBRIGADIR: TIBStringField;
     dset_discon_vdsDiscontype_all: TIBStringField;
     dset_discon_vdsDATECON: TDateTimeField;
+    m_picters: TkbmMemTable;
+    m_pictersid: TIntegerField;
+    m_pictersPicter: TBlobField;
+    m_pictersfilename: TStringField;
     procedure dset_BoltsBRIGOPENGetText(Sender: TField; var Text: String;
       DisplayText: Boolean);
     procedure dset_discon_vdsCalcFields(DataSet: TDataSet);
   private
     F_PrintingDoc: TPrintingDoc;
     function LoadFromFile(short_fn: string): boolean;
+    function LoadPicters(OrderID: integer):boolean;
+    procedure LoadRedrawPict(str:string;num:integer;fielname:string) ;
+    procedure ClearImage(mes:string);
+    procedure ShowMess(s:string);
   public
     property PrintingDoc: TPrintingDoc read F_PrintingDoc write F_PrintingDoc;
     procedure Print;
@@ -89,11 +98,13 @@ begin
   if is_load then
   begin
     frReport.PrepareReport;
+
     frReport.ShowReport;
   end;
 end;
 
 procedure Tdm_AddPrint.PrintOrder(OrderID: integer);
+var i:integer;
 begin
   if tran.InTransaction then
     tran.Rollback;
@@ -129,6 +140,8 @@ begin
     dset_Bolts.ParamByName('pOrderID').AsInteger:=OrderID;
     dset_Bolts.Open;
 
+    LoadPicters(OrderID);
+
     if not(dset.Eof and dset.Bof) then
     begin
       F_PrintingDoc:=pdOrder;
@@ -142,6 +155,7 @@ begin
       raise Exception.Create(E.Message+'(Tdm_AddPrint.PrintOrder)');
     end;
   end;
+
 end;
 
 procedure Tdm_AddPrint.dset_BoltsBRIGOPENGetText(Sender: TField;
@@ -164,7 +178,7 @@ begin
   try
   str:=
 
-    ' select (select FullOrderNum from get_fullordernum(o.ordernumber, o.fk_orders_district))  OrderNum,'+
+    ' select o.ordernumber, (select FullOrderNum from get_fullordernum(o.ordernumber, o.fk_orders_district))  OrderNum,'+
     ' o.datecoming, o.dateclosed, o.applicantphone,'+
     ' (select substr1(works,18,500) from get_orderworks_vds( o.id, 1, 1 )) WhatIsDone_first,'+
     ' (select works from get_orderworks_vds( o.id, 2, 3 )) WhatIsDone,'+
@@ -245,5 +259,77 @@ begin
    FieldByName('Discontype_all').AsString:=FieldByName('Discontype_all').AsString+'сп. стояк.-'+FieldByName('g_st_sp').AsString+'; ';
 end;
 end;
+
+function Tdm_AddPrint.LoadPicters(OrderID: integer): boolean;
+var dm_Picters:Tdm_avrpicter;
+    ntyp:integer;
+begin
+   dm_Picters:=Tdm_avrpicter.Create(nil);
+   dm_Picters.ClearProc:= ClearImage;
+   dm_picters.Showmes:=ShowMess;
+   result:=false;
+  try
+   dm_Picters.F_ID_order:=OrderID;
+   dm_Picters.Year:=GetYear(dset.fieldbyname('datecoming').AsDateTime);
+
+   dm_Picters.Ordernumber:=dset.fieldbyname('ordernumber').AsInteger;
+   if m_picters.Active then m_picters.Close;
+   m_picters.Open;
+   if  dm_picters.OpenDset then
+   begin
+     dm_Picters.OnRedraw:=LoadRedrawPict;
+     for ntyp:=1 to 4 do
+     begin
+
+      m_picters.Append;
+      m_picters.FieldByName('id').AsInteger:=ntyp;
+      dm_Picters.SetTyp(ntyp);
+      m_picters.Post;
+      if m_picters.FieldByName('filename').AsString='' then
+         m_picters.Delete;
+      while not dm_Picters.mem.Eof do
+      begin
+       m_picters.Append;
+       m_picters.FieldByName('id').AsInteger:=dm_Picters.f_typ;
+       dm_Picters.mem.Next;
+       m_picters.Post;
+       if m_picters.FieldByName('filename').AsString='' then
+         m_picters.Delete;
+
+      end;
+     end;
+     result:=true;
+   end;
+   finally
+     dm_Picters.free;
+   end;
+
+end;
+
+procedure Tdm_AddPrint.LoadRedrawPict(str: string; num: integer;
+  fielname: string);
+begin
+  if FileExists(str) then
+  begin
+
+    if m_picters.State = dsInsert then
+    begin
+      m_picters.FieldByName('filename').AsString:=str;
+      TBlobField(m_picters.FieldByName('Picter')).LoadFromFile(str);
+     
+    end;
+  end;
+end;
+
+procedure Tdm_AddPrint.ClearImage(mes:string);
+begin
+///
+end;
+
+ procedure Tdm_AddPrint.ShowMess(s:string);
+ begin
+// Showmessage(s);
+ end;
+
 
 end.

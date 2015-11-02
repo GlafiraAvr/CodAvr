@@ -4,7 +4,7 @@ interface
 
 uses
   SysUtils, Classes, BaseBuffDModule, DB, kbmMemTable, IBDatabase,
-  IBCustomDataSet;
+  IBCustomDataSet, IBSQL;
 
 type
   Tdm_DepBuff = class(Tdm_BaseBuff)

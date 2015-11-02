@@ -118,7 +118,7 @@ var
   prop_pnl, prop_img: double;
 begin
 
-
+  if Image.Picture.Height>0 then begin
   prop_pnl:=pnl_Img.Height/pnl_Img.Width;
   prop_img:=Image.Picture.Height/Image.Picture.Width;
   if prop_img<=prop_pnl then
@@ -134,6 +134,7 @@ begin
     Image.Width:=Round(Image.Height/prop_img)-2;
     Image.Left:=((pnl_Img.Width-Image.Width) div 2)-2;
   end;
+  end;
 end;
 
 procedure TFrame_picters.SetTyp(typ:integer);
@@ -143,6 +144,7 @@ begin
   1: ds_main.DataSet:=F_DM.mem_maps;
   2: ds_main.DataSet:=F_DM.mem_before;
   3: ds_main.DataSet:=F_DM.mem_after;
+  4: ds_main.DataSet:=F_DM.mem_excav;
  end;
  f_DM.SetTyp(F_typ);
  sp_del.Enabled:=(F_DM.Rec>0)and(not f_readOnly);
@@ -152,6 +154,7 @@ end;
 procedure TFrame_picters.ClearImage(mes:string='');
 begin
    Image.Picture:=nil;
+   blb_head.Caption:='';
  { Image.Canvas.Rectangle(0,0,Image.Width, Image.Height );}
  if mes<>'' then
  begin

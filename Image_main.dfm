@@ -26,15 +26,17 @@ object frm_picters: Tfrm_picters
   end
   inline Frame_picters: TFrame_picters
     Left = 0
-    Top = 49
+    Top = 41
     Width = 519
-    Height = 310
+    Height = 318
     Align = alClient
     TabOrder = 2
     inherited pnl_buttons: TPanel
-      Top = 276
+      Top = 284
       Width = 519
       inherited spb_add: TSpeedButton
+        Left = 320
+        Top = 4
         Width = 25
         Height = 26
         Font.Charset = ANSI_CHARSET
@@ -71,7 +73,7 @@ object frm_picters: Tfrm_picters
     end
     inherited pnl_Img: TPanel
       Width = 519
-      Height = 243
+      Height = 251
       inherited Image: TImage
         Left = 24
         Top = 0
@@ -81,7 +83,7 @@ object frm_picters: Tfrm_picters
       end
       inherited lb_mess: TLabel
         Width = 515
-        Height = 239
+        Height = 247
       end
     end
   end
@@ -89,10 +91,11 @@ object frm_picters: Tfrm_picters
     Left = 0
     Top = 0
     Width = 519
-    Height = 49
+    Height = 41
     Align = alTop
     Columns = 3
     Ctl3D = True
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -100,9 +103,7 @@ object frm_picters: Tfrm_picters
     Font.Style = [fsBold]
     ItemIndex = 0
     Items.Strings = (
-      #1050#1072#1088#1090#1072
-      #1044#1086' '#1088#1072#1073#1086#1090#1099
-      #1055#1086#1089#1083#1077' '#1088#1072#1073#1086#1090#1099)
+      #1055#1086#1074#1088#1077#1078#1076#1077#1085#1080#1077)
     ParentCtl3D = False
     ParentFont = False
     ParentShowHint = False

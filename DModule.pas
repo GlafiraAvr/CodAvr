@@ -328,7 +328,7 @@ end;
 
 procedure TDM_Main.Timer1Timer(Sender: TObject);
 
-const _interval = 10;// в минутах
+const _interval = 5;// в минутах
 
 var  time_morning, time_evening: TDateTime;
 
@@ -416,7 +416,7 @@ var  time_morning, time_evening: TDateTime;
     end;
    end;
 
-  function checkAvarSvod:boolean; //проверка отправки сводкки Ведомость аварийных ситуация
+  function checkAvarSvod:boolean; //проверка отправки сводкки Ведомость аварийных ситуация Dtljvjcnm fdfhbqys[ cbnefwbz
   var _t1,_t2:TDateTime;
        fn:string;
   begin
@@ -451,6 +451,37 @@ var  time_morning, time_evening: TDateTime;
         result:= (dset_tmp2.FieldByName('datetime').AsDateTime<Date);
     end;
   end;
+{нужноотправлять 2 раза 8:45-9:30 9:45-10:30}
+  function checkReportAll:boolean;//напоминалека "Комплекс Харькковводоснабжение отчет"
+   var  t2:TDateTime;
+        t1,t3,t4:TDateTime;
+        timeNow,timeSent:TDateTime;
+        dateNow:TDatetime;
+   fn:string;
+  begin
+   t1:=strtotime('08:45');
+   t2:=strtotime('09:30');
+   t3:=strtotime('09:45');
+   t4:=strtotime('10:30');
+
+   result:=false;
+   if (Time()<t4+0.013)and(Time()>t1-0.013) then //20 минут
+    begin
+     fn:='reportAll';
+       MyOpenSQL(dset_tmp2,' select sv.sv_name, sv.file_name,sv.datetime, '+
+                           ' current_timestamp dateNow  from SentSvEmail sv where sv_name='''+fn+'''');
+
+       timeNow:=frac(dset_tmp2.fieldbyname('dateNow').AsDateTime);
+       timeSent:=dset_tmp2.fieldbyname('datetime').AsDateTime;
+       dateNow:=trunc(dset_tmp2.fieldbyname('dateNow').AsDateTime);
+       if (timeNow>=t1) and (timeNow<=t2) then
+        result:=((dateNow+t1)>timeSent);
+       if (timeNow>=t3) and (timeNow<=t4) then
+          result:= ((dateNow+t3)>timeSent);
+    end;
+  end;
+
+
 
 begin
   //
@@ -460,7 +491,7 @@ begin
     then
        exit;
       Timer1.Enabled := false;
-      Timer1.Interval := (_interval * 60000) - DeltaCorrect;
+      Timer1.Interval  := (_interval * 60000) - DeltaCorrect;
   if (checkfile) then
     begin
       Application.BringToFront;
@@ -486,6 +517,15 @@ begin
                             'Внимание!', MB_OK+MB_ICONINFORMATION);
 
   end;
+
+   if  checkReportAll then
+  begin
+    Application.BringToFront;
+    Application.MessageBox(PChar('Отправьте "Комплекс Харькковводоснабжение отчет"'),
+                            'Внимание!', MB_OK+MB_ICONINFORMATION);
+
+  end;
+
 
 
 

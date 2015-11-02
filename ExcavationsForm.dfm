@@ -600,6 +600,15 @@ inherited frm_Excavations: Tfrm_Excavations
       OnEnter = de_Form7Enter
       OnExit = de_Form7Exit
     end
+    object btn_image: TButton
+      Left = 528
+      Top = 96
+      Width = 97
+      Height = 25
+      Caption = #1048#1079#1086#1073#1088#1072#1078#1077#1085#1080#1077
+      TabOrder = 20
+      OnClick = btn_imageClick
+    end
   end
   inherited pnl_Bottom: TPanel
     Top = 566

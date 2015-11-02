@@ -17,6 +17,17 @@ cookies.xml
 *.txt
 *.frp
 baza/*
+ZIPTV6/*
+voc_prav/*
+s
+dsd
+rer
+VocCache/*
+ABON/
+AppErrPics/
+*.EXE
+*.DCU
+
 
 
 # except foo.html which is maintained by hand.

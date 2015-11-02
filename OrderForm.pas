@@ -25,7 +25,7 @@ uses
   ToolEdit, RxLookup, RxDBComb, ImgList, IBCustomDataSet, DModule,
   IBDatabase, IBSQL, Math, SecurityBaseForm, AomComTypesUnit, OrderDModule,
   NGDepManager, NumSOBuffDModule, NumSOForm, NaledUnit, {NumSONGUnit,}CanselForm,
-  workSql,NewDisconnections2,Image_main;
+  workSql,NewDisconnections2;
 
 const
   ID_MAGISTRAL = 1;
@@ -361,7 +361,7 @@ uses WarningForm, GlobalData,  DisconnectionsForm, NewDisconnections,
   HelpFunctions, HelpClasses, OrderNumberForm, OrderShortInfoForm,
   AddPrintDModule, AppGUIDS, StringConsts, AomComClientDModule, DepManager,
   AvarOnMapReport, BoltManager, RightsManagerDModule, SuborderManager, NGReportManager,QCanselForm,
-  Closed1562Manager ,FloodingEditForm;
+  Closed1562Manager ,FloodingEditForm,Image_main;
 
 
 {$R *.dfm}
@@ -706,7 +706,9 @@ begin
     end;
   listNumbers:=GetListNumsordersForExcav();
   frm_Exc.ListNumsorders:=listNumbers;
-
+  //для изображений
+  frm_Exc.OrderNumber:=StrTOInt(lbl_OrderNum.Caption);
+  frm_Exc.Year:=GetYear(dp_Start.Date);
   frm_Exc.ShowModal;
   SetLastExcWorkType;
 

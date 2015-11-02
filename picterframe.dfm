@@ -14,9 +14,9 @@ object Frame_picters: TFrame_picters
     TabOrder = 0
     object spb_add: TSpeedButton
       Left = 322
-      Top = 4
+      Top = 8
       Width = 23
-      Height = 22
+      Height = 18
       Caption = '+'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText

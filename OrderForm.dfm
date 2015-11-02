@@ -1615,7 +1615,6 @@ inherited frm_Order: Tfrm_Order
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 15
-    Visible = False
     OnClick = btn_imagesClick
   end
   object ds_tubediameter: TDataSource

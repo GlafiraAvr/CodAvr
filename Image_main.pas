@@ -8,6 +8,7 @@ uses
   picterframe, ComCtrls, DBCtrls;
 
  const Title='Программа';
+       typ_excav=4;
 type
   Tfrm_picters = class(TForm)
     BitBtn2: TBitBtn;
@@ -32,6 +33,7 @@ type
     F_readOnly:boolean;
     F_orderNumber:integer;
     F_year:integer;
+    F_excav:boolean;
     procedure ClearStatus();
     procedure Showstate(mes:string);
     procedure ShowMess(s:string);
@@ -41,6 +43,7 @@ type
     property _ReadOnly:boolean read F_readOnly write F_readOnly;
     property OrderNumber:integer write F_orderNumber;
     property year:integer write F_year;
+    property excav:boolean write F_excav;
   end;
 
 var
@@ -60,7 +63,10 @@ begin
      dm_Picters.F_ID_order:=F_OrderID
    else
      dm_Picters.F_ID_order:=1;
-  dm_Picters.f_typ:=1;
+  if F_excav then
+     dm_Picters.f_typ:=typ_excav
+  else
+     dm_Picters.f_typ:=1;
   if F_year=0 then
      F_year:=2014;
   dm_Picters.Year:=F_year;
@@ -68,11 +74,20 @@ begin
    F_OrderNumber:=1;
   dm_Picters.Ordernumber:=F_orderNumber;
   Caption:='Фотографии наряд №'+IntToStr(F_orderNumber);
-
+  if F_excav then
+  begin
+     Caption:=Caption+' (Раскопки)';
+     rg_typ.Height:=1;
+  end
+  else
+     rg_typ.Height:=41;
   if dm_Picters.OpenDset then
   begin
   Frame_picters.Init;
-  Frame_picters.typ:=1;
+  if F_excav then
+     Frame_picters.typ:=typ_excav
+  else
+    Frame_picters.typ:=1;
   Frame_picters.readOnly:= F_readOnly;
 
   dm_Picters.mem_maps.First;
@@ -104,6 +119,7 @@ begin
  dm_Picters:=Tdm_avrpicter.Create(nil);
  Frame_picters._DM:=dm_Picters;
  dm_Picters.Showmes:=ShowMess;
+ F_excav:=false;
 end;
 
 procedure Tfrm_picters.rg_typClick(Sender: TObject);

@@ -334,7 +334,7 @@ begin
  //      ExportFRToExcelAndSendByEmail(F_DM.frReport,full_fn, 'Комплекс "Харьковводоснабжение" отчет');
        if   F_Dm.ExportFRToExcel(F_DM.frReport, full_fn ) then
        begin
-
+        F_DM.SaveAfterSend(file_name);
         SendByEmail( full_fn
             , 'Комплекс "Харьковводоснабжение" отчет'   );
 

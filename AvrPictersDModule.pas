@@ -41,6 +41,13 @@ type
     mem_beforeServFile_Name: TStringField;
     mem_afterServFile_Name: TStringField;
     dsetSERVFILE_NAME: TIBStringField;
+    mem_excav: TRxMemoryData;
+    IntegerField5: TIntegerField;
+    StringField5: TStringField;
+    IntegerField6: TIntegerField;
+    BlobField3: TBlobField;
+    StringField6: TStringField;
+    StringField7: TStringField;
     procedure DataModuleDestroy(Sender: TObject);
     procedure DataModuleCreate(Sender: TObject);
     procedure mem_mapsAfterScroll(DataSet: TDataSet);
@@ -79,6 +86,7 @@ type
     property Year:integer  write F_year;
     property Connected:boolean read IsConnect;
     property Showmes:TSimpleProce write SetShowMess;
+    property mem : TRxMemoryData read  f_curmem;
   end;
 
 
@@ -116,6 +124,7 @@ begin
  mem_maps.Open;
  mem_before.Open;
  mem_after.Open;
+  mem_excav.Open;
  dset.First;
  while not  (dset.Eof ) do
     begin
@@ -125,6 +134,7 @@ begin
             1:  Savetomem(mem_maps);
             2:  Savetomem(mem_before);
             3:  Savetomem(mem_after);
+            4:  Savetomem(mem_excav);
         end;
         dset.Next;
 end;
@@ -142,6 +152,7 @@ F_Dm_PicterClient.Free;
 mem_maps.Close;
 mem_after.Close;
 mem_before.Close;
+mem_excav.Close;
 DeleteDir;
 end;
 
@@ -205,8 +216,9 @@ if not  f_curmem.FieldByName('ServFile_Name').IsNull then
  begin
   if tran.Active then
   tran.Rollback;
-  if F_DM_PicterClient.DelPicter(f_year,F_ordernumber,f_curmem.FieldByName('ServFile_Name').AsString) then
-  begin
+  if  FileExists(fullDirName+'\'+ f_curmem.FieldByName('saved_picter').AsString) then
+   F_DM_PicterClient.DelPicter(f_year,F_ordernumber,f_curmem.FieldByName('ServFile_Name').AsString);
+//  begin
    tran.StartTransaction;
    IBSQL.SQL.Text:=Format('delete from PICTERS_ORDER where id=%d',[ f_curmem.FieldByName('id').AsInteger]);
    IBSQL.ExecQuery;
@@ -216,7 +228,7 @@ if not  f_curmem.FieldByName('ServFile_Name').IsNull then
    if f_curmem.RecordCount=0 then
      F_ClearProce();
    result:=true;
-  end;
+ // end;
  end;
 except
  if tran.Active then
@@ -332,6 +344,7 @@ case F_typ of
  1:f_curmem:=mem_maps;
  2:f_curmem:=mem_before;
  3:f_curmem:=mem_after;
+ 4:f_curmem:=mem_excav;
 end;
 f_curmem.First;
 Rec_Count:=f_curmem.RecordCount;

@@ -19,7 +19,6 @@ object dm_AddPrint: Tdm_AddPrint
     Top = 16
   end
   object tran: TIBTransaction
-    Active = True
     DefaultDatabase = DM_Main.IBDatabase
     Params.Strings = (
       'concurrency'
@@ -199,5 +198,41 @@ object dm_AddPrint: Tdm_AddPrint
     DataSet = dset_discon_vds
     Left = 120
     Top = 160
+  end
+  object m_picters: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
+    Left = 416
+    Top = 184
+    object m_pictersid: TIntegerField
+      FieldName = 'id'
+    end
+    object m_pictersPicter: TBlobField
+      FieldName = 'Picter'
+      Size = 10000
+    end
+    object m_pictersfilename: TStringField
+      FieldName = 'filename'
+      Size = 100
+    end
+  end
+  object frDBDataSet1: TfrDBDataSet
+    DataSet = m_picters
+    Left = 56
+    Top = 184
   end
 end

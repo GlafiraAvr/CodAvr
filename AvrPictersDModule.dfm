@@ -133,4 +133,31 @@ object dm_avrpicter: Tdm_avrpicter
       Size = 25
     end
   end
+  object mem_excav: TRxMemoryData
+    FieldDefs = <>
+    AfterScroll = mem_mapsAfterScroll
+    Left = 256
+    Top = 120
+    object IntegerField5: TIntegerField
+      FieldName = 'id'
+    end
+    object StringField5: TStringField
+      FieldName = 'fileName'
+      Size = 50
+    end
+    object IntegerField6: TIntegerField
+      FieldName = 'id_typ'
+    end
+    object BlobField3: TBlobField
+      FieldName = 'Picter'
+    end
+    object StringField6: TStringField
+      FieldName = 'saved_picter'
+      Size = 50
+    end
+    object StringField7: TStringField
+      FieldName = 'ServFile_Name'
+      Size = 25
+    end
+  end
 end

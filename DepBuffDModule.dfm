@@ -2,7 +2,7 @@ inherited dm_DepBuff: Tdm_DepBuff
   OldCreateOrder = True
   Left = 462
   Top = 251
-  Height = 319
+  Height = 344
   Width = 469
   inherited mt_BuffData: TkbmMemTable
     AfterInsert = mt_BuffDataAfterInsert
