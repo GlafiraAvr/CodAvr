@@ -16,6 +16,7 @@ cookies.xml
 .gitignore
 *.txt
 *.frp
+*.dcu
 baza/*
 ZIPTV6/*
 voc_prav/*
@@ -25,8 +26,11 @@ rer
 VocCache/*
 ABON/
 AppErrPics/
+<<<<<<< HEAD
 *.EXE
 *.DCU
+*.exe
+avr_arm.exe
 
 
 
